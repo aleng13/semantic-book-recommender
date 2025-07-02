@@ -1,0 +1,12 @@
+services:
+  - type: web                        # You're deploying a web server (FastAPI app)
+    name: semantic-book-recommender-backend  # Name shown in Render dashboard
+    env: python                      # Tell Render it's a Python app
+    plan: free                       # Use Render’s free plan
+    buildCommand: pip install -r backend/requirements.txt
+                                    # How to install your app's Python packages
+    startCommand: uvicorn backend.main:app --host 0.0.0.0 --port 10000
+                                    # How to start the FastAPI app
+    envVars:                         # Environment variables to set up
+      - key: PYTHONPATH
+        value: backend              # Ensures `from logic.xyz import` works
